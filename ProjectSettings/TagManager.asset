@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Enemy
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - map
+  - Water
+  - UI
+  - enimies
+  - Player
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: base floor
+    uniqueID: 2963562463
+    locked: 0
+  - name: eneimies
+    uniqueID: 1256003077
+    locked: 0
+  - name: Roads
+    uniqueID: 1949562547
+    locked: 0
+  - name: Map
+    uniqueID: 3989704263
+    locked: 0
