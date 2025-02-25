@@ -12,12 +12,12 @@ TagManager:
   - map
   - Water
   - UI
-  - enimies
+  - Roads
   - Player
-  - 
-  - 
-  - 
-  - 
+  - Spawner
+  - Home base
+  - Turret
+  - enemy
   - 
   - 
   - 
@@ -42,15 +42,15 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: base floor
+  - name: map
     uniqueID: 2963562463
     locked: 0
-  - name: eneimies
+  - name: Roads
     uniqueID: 1256003077
     locked: 0
-  - name: Roads
+  - name: interactables
     uniqueID: 1949562547
     locked: 0
-  - name: Map
+  - name: 
     uniqueID: 3989704263
     locked: 0
