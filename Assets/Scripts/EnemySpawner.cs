@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    public GameObject EnemyFighter;               // The EnemyFighter prefab to spawn
+    public EnemyMovement EnemyFighter;               // The EnemyFighter prefab to spawn
     public Transform[] spawnPoints;               // Array to hold spawn points (Spawner 1, Spawner 2, Spawner 3)
     public float spawnInterval = 3f;              // How often the enemy should spawn (in seconds)
-
+    public Transform[] waypoints; 
     private void Start()
     {
         // Start the spawning process
@@ -23,6 +23,7 @@ public class EnemySpawner : MonoBehaviour
         Transform randomSpawnPoint = spawnPoints[randomIndex];
 
         // Instantiate the EnemyFighter prefab at the selected spawn point's position
-        Instantiate(EnemyFighter, randomSpawnPoint.position, Quaternion.identity);
+        var enemy = Instantiate(EnemyFighter, randomSpawnPoint.position, Quaternion.identity);
+        enemy.Setup(waypoints, spawnPoints[0]);
     }
 }

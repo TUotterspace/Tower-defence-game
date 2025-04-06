@@ -9,8 +9,10 @@ public class EnemyMovement : MonoBehaviour
     private int currentWaypointIndex = 0; // Index to track current waypoint
     public float moveSpeed = 5f;       // Speed of the enemy's movement
 
-    void Start()
-    {
+    public void Setup(Transform[] newWaypoints, Transform newSpawnPoint)
+   {
+        spawnPoint = newSpawnPoint;
+        waypoints = newWaypoints;
         // Start the enemy at the spawn point (e.g., SP1, SP2, SP3, etc.)
         if (spawnPoint != null)
         {

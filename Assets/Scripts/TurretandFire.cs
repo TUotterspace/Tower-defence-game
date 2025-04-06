@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class TurretandFire : MonoBehaviour
@@ -11,7 +12,7 @@ public class TurretandFire : MonoBehaviour
     public float detectionRange = 10f;    // Range within which the turret detects enemies
     public float maxAngle = 45f;          // Max angle the turret can rotate to target the enemy (for limited range of rotation)
 
-    private GameObject targetEnemy;       // The current target enemy
+    public GameObject targetEnemy;       // The current target enemy
 
     void Update()
     {
@@ -69,6 +70,14 @@ public class TurretandFire : MonoBehaviour
                 // Instantiate a new bullet at the firePoint's position and rotation
                 Instantiate(bulletPrefab, firePoint.position, bulletRotation);
             }
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        var enemy = collision.gameObject.GetComponent<EnemyMovement>();
+        if (enemy != null)
+        {
+            Destroy(enemy.gameObject);
         }
     }
 }
