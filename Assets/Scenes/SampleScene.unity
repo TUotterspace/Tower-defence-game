@@ -461,11 +461,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7403311475612045120, guid: 5910909f9252d4444bb05f334c807378, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 1.1721
       objectReference: {fileID: 0}
     - target: {fileID: 7403311475612045120, guid: 5910909f9252d4444bb05f334c807378, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1
+      value: 1.0574
       objectReference: {fileID: 0}
     - target: {fileID: 7403311475612045120, guid: 5910909f9252d4444bb05f334c807378, type: 3}
       propertyPath: m_LocalScale.z
@@ -473,11 +473,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7403311475612045120, guid: 5910909f9252d4444bb05f334c807378, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.92
+      value: 4.0061
       objectReference: {fileID: 0}
     - target: {fileID: 7403311475612045120, guid: 5910909f9252d4444bb05f334c807378, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.6
+      value: 0.5713
       objectReference: {fileID: 0}
     - target: {fileID: 7403311475612045120, guid: 5910909f9252d4444bb05f334c807378, type: 3}
       propertyPath: m_LocalPosition.z
@@ -515,6 +515,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Turret (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7403311475612045122, guid: 5910909f9252d4444bb05f334c807378, type: 3}
+      propertyPath: targetEnemy
+      value: 
+      objectReference: {fileID: 2409369796940849569, guid: 33a6acc74f56ebd49b040ff21c889c7c, type: 3}
     - target: {fileID: 7403311475612045122, guid: 5910909f9252d4444bb05f334c807378, type: 3}
       propertyPath: bulletPrefab
       value: 
@@ -1137,6 +1141,10 @@ PrefabInstance:
       value: Turret
       objectReference: {fileID: 0}
     - target: {fileID: 7403311475612045122, guid: 5910909f9252d4444bb05f334c807378, type: 3}
+      propertyPath: targetEnemy
+      value: 
+      objectReference: {fileID: 2409369796940849569, guid: 5c140c2ece453b14fb97544bc60e3f87, type: 3}
+    - target: {fileID: 7403311475612045122, guid: 5910909f9252d4444bb05f334c807378, type: 3}
       propertyPath: bulletPrefab
       value: 
       objectReference: {fileID: 1454079581169009610, guid: 23df4689b4da67c4bafd55e266065471, type: 3}
@@ -1341,7 +1349,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -1815,6 +1823,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 15
+  interactionRange: 3
+  bulletPrefab: {fileID: 0}
+  firePoint: {fileID: 0}
+  bulletSpeed: 10
 --- !u!212 &763019270
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4952,6 +4964,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Turret
       objectReference: {fileID: 0}
+    - target: {fileID: 7403311475612045122, guid: 5910909f9252d4444bb05f334c807378, type: 3}
+      propertyPath: targetEnemy
+      value: 
+      objectReference: {fileID: 2409369796940849569, guid: 0b8addf2bb2c4af48b45f5847a4a2b53, type: 3}
     - target: {fileID: 7403311475612045122, guid: 5910909f9252d4444bb05f334c807378, type: 3}
       propertyPath: bulletPrefab
       value: 
