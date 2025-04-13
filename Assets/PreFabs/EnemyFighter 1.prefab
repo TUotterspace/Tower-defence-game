@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2409369796940849571}
   - component: {fileID: -3896186678676474269}
   - component: {fileID: -7251736725145064914}
+  - component: {fileID: -4516219725022760884}
   m_Layer: 0
   m_Name: EnemyFighter 1
   m_TagString: Enemy
@@ -127,4 +128,17 @@ MonoBehaviour:
   waypoints:
   - {fileID: 0}
   spawnPoint: {fileID: 0}
-  moveSpeed: 1
+  moveSpeed: 0.5
+--- !u!114 &-4516219725022760884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2409369796940849569}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58971e3a987c32346998de3879a067db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 1

@@ -1,160 +1,65 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class TurretandFire : MonoBehaviour
+public class TurretAndFire : MonoBehaviour
+{
+    public GameObject bulletPrefab;       // The bullet prefab to be fired
+    public Transform firePoint;           // The point from which bullets will be fired
+    public float fireRate = 1f;           // How often the turret fires (in seconds)
+    public float detectionRange = 10f;    // Range within which the turret detects enemies
 
+    private float fireCooldown = 0f;      // Timer to control fire rate
+    private GameObject targetEnemy;       // The current target enemy
+
+    void Update()
     {
+        FindTargetEnemy();
+        fireCooldown -= Time.deltaTime;
 
-        public GameObject bulletPrefab;       // The bullet prefab to be fired 
-
-        public Transform firePoint;           // The point from which bullets will be fired 
-
-        public float fireRate = 1f;           // How often the turret fires (in seconds) 
-
-        private float fireCooldown = 0f;      // Timer to control fire rate 
-
-        public float detectionRange = 10f;    // Range within which the turret detects enemies 
-
-        public float maxAngle = 45f;          // Max angle the turret can rotate to target the enemy (for limited range of rotation) 
-
-
-
-        public GameObject targetEnemy;       // The current target enemy 
-
-
-
-        void Update()
-
+        if (targetEnemy != null && Vector3.Distance(transform.position, targetEnemy.transform.position) <= detectionRange)
         {
+            RotateTowardTarget();
 
-            // Find the closest enemy within the detection range 
-
-            FindTargetEnemy();
-
-
-
-            // Decrease fireCooldown over time 
-
-            fireCooldown -= Time.deltaTime;
-
-
-
-            // If there is a target and it's within range, shoot at the enemy 
-
-            if (targetEnemy != null && Vector3.Distance(transform.position, targetEnemy.transform.position) <= detectionRange)
-
+            if (fireCooldown <= 0f)
             {
-
-                if (fireCooldown <= 0f)
-
-                {
-
-                    FireAtTarget();
-
-                    fireCooldown = fireRate; // Reset cooldown to fireRate 
-
-                }
-
+                FireAtTarget();
+                fireCooldown = fireRate;
             }
+        }
+    }
 
+    void FindTargetEnemy()
+    {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        float closestDistance = Mathf.Infinity;
+        GameObject closestEnemy = null;
+
+        foreach (GameObject enemy in enemies)
+        {
+            float distance = Vector3.Distance(transform.position, enemy.transform.position);
+            if (distance < closestDistance && distance <= detectionRange)
+            {
+                closestDistance = distance;
+                closestEnemy = enemy;
+            }
         }
 
+        targetEnemy = closestEnemy;
+    }
 
+    void RotateTowardTarget()
+    {
+        Vector3 direction = targetEnemy.transform.position - transform.position;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0f, 0f, angle); // Rotate turret in 2D
+    }
 
-        // Find the closest enemy within the detection range 
-
-        void FindTargetEnemy()
-
+    void FireAtTarget()
+    {
+        if (bulletPrefab != null && firePoint != null)
         {
-
-            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy"); // Assuming your enemies have the tag "Enemy" 
-
-            float closestDistance = Mathf.Infinity;
-
-
-
-            targetEnemy = null; // Reset target before finding the closest enemy 
-
-
-
-            foreach (GameObject enemy in enemies)
-
-            {
-
-                float distance = Vector3.Distance(transform.position, enemy.transform.position);
-
-                if (distance < closestDistance && distance <= detectionRange)
-
-                {
-
-                    closestDistance = distance;
-
-                    targetEnemy = enemy;
-
-                }
-
-            }
-
+            Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         }
-
-
-
-        // Function to fire bullets at the target enemy 
-
-        void FireAtTarget()
-
-        {
-
-            if (bulletPrefab != null && firePoint != null && targetEnemy != null)
-
-            {
-
-                // Calculate the direction towards the enemy 
-
-                Vector3 directionToTarget = (targetEnemy.transform.position - firePoint.position).normalized;
-
-                float angle = Mathf.Atan2(directionToTarget.y, directionToTarget.x) * Mathf.Rad2Deg;
-
-
-
-                // Check if the target is within the turret's firing angle range (optional) 
-
-                if (Mathf.Abs(angle) <= maxAngle)
-
-                {
-
-                    // Create a rotation towards the target direction 
-
-                    Quaternion bulletRotation = Quaternion.Euler(0f, 0f, angle);
-
-
-
-                    // Instantiate a new bullet at the firePoint's position and rotation 
-
-                    Instantiate(bulletPrefab, firePoint.position, bulletRotation);
-
-                }
-
-            }
-
-        }
-
-        private void OnTriggerEnter2D(Collider2D collision)
-
-        {
-
-            var enemy = collision.gameObject.GetComponent<EnemyMovement>();
-
-            if (enemy != null)
-
-            {
-
-                Destroy(enemy.gameObject);
-
-            }
-
-        }
-
-    } 
+    }
+}    

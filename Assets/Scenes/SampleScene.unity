@@ -515,6 +515,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Turret (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7403311475612045121, guid: 5910909f9252d4444bb05f334c807378, type: 3}
+      propertyPath: m_TagString
+      value: Turret
+      objectReference: {fileID: 0}
     - target: {fileID: 7403311475612045122, guid: 5910909f9252d4444bb05f334c807378, type: 3}
       propertyPath: targetEnemy
       value: 
@@ -1140,6 +1144,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Turret
       objectReference: {fileID: 0}
+    - target: {fileID: 7403311475612045121, guid: 5910909f9252d4444bb05f334c807378, type: 3}
+      propertyPath: m_TagString
+      value: Turret
+      objectReference: {fileID: 0}
     - target: {fileID: 7403311475612045122, guid: 5910909f9252d4444bb05f334c807378, type: 3}
       propertyPath: targetEnemy
       value: 
@@ -1354,7 +1362,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 2
+  m_Radius: 4
 --- !u!4 &478607565 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7403311475612045120, guid: 5910909f9252d4444bb05f334c807378, type: 3}
@@ -3131,7 +3139,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 2
+  m_Radius: 5
 --- !u!4 &1567167451 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 508086870466199930, guid: a05bc974d119b774abaced51273f27b5, type: 3}
@@ -3157,7 +3165,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 2
+  m_Radius: 5
 --- !u!1 &1580384445
 GameObject:
   m_ObjectHideFlags: 0
@@ -4962,6 +4970,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7403311475612045121, guid: 5910909f9252d4444bb05f334c807378, type: 3}
       propertyPath: m_Name
+      value: Turret
+      objectReference: {fileID: 0}
+    - target: {fileID: 7403311475612045121, guid: 5910909f9252d4444bb05f334c807378, type: 3}
+      propertyPath: m_TagString
       value: Turret
       objectReference: {fileID: 0}
     - target: {fileID: 7403311475612045122, guid: 5910909f9252d4444bb05f334c807378, type: 3}
