@@ -5,24 +5,15 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public float moveSpeed = 5f;
-    public float interactionRange = 3f;
 
-    public GameObject bulletPrefab; // Drag your bullet prefab here
-    public Transform firePoint;     // Empty GameObject as the bullet spawn point
+    public GameObject bulletPrefab;
+    public Transform firePoint;
     public float bulletSpeed = 10f;
-
-    private GameObject targetTurret = null;
 
     void Update()
     {
         HandleMovement();
-        DetectTurret();
         HandleShooting();
-
-        if (targetTurret != null && Input.GetKeyDown(KeyCode.F))
-        {
-            HealTurret();
-        }
     }
 
     void HandleMovement()
@@ -43,46 +34,23 @@ public class PlayerMovement : MonoBehaviour
 
     void HandleShooting()
     {
-        if (Input.GetMouseButtonDown(0)) // Left mouse button
+        if (Input.GetKeyDown(KeyCode.R))
         {
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             mousePosition.z = 0f;
 
             Vector2 direction = (mousePosition - firePoint.position).normalized;
 
-            GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            firePoint.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+
+            Debug.DrawLine(firePoint.position, mousePosition, Color.red, 1f);
+
+            GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
             Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
             if (rb != null)
             {
                 rb.velocity = direction * bulletSpeed;
-            }
-        }
-    }
-
-    void DetectTurret()
-    {
-        GameObject[] turrets = GameObject.FindGameObjectsWithTag("Turret");
-        targetTurret = null;
-
-        foreach (GameObject turret in turrets)
-        {
-            float distance = Vector3.Distance(transform.position, turret.transform.position);
-            if (distance <= interactionRange)
-            {
-                targetTurret = turret;
-            }
-        }
-    }
-
-    void HealTurret()
-    {
-        if (targetTurret != null)
-        {
-            TurretHealth turretHealth = targetTurret.GetComponent<TurretHealth>();
-            if (turretHealth != null)
-            {
-                turretHealth.Heal(20f);
-                Debug.Log("Healed turret!");
             }
         }
     }
