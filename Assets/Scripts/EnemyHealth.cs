@@ -9,6 +9,8 @@ public class EnemyHealth : MonoBehaviour
 
     void Start()
     {
+        float difficulty = DifficultyScaler.GetDifficultyMultiplier();
+        maxHealth = Mathf.CeilToInt(maxHealth * difficulty); // scale max health
         currentHealth = maxHealth;
     }
 

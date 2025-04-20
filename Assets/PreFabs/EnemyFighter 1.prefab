@@ -143,6 +143,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 10
+  creditValue: 50
 --- !u!114 &632103583024088062
 MonoBehaviour:
   m_ObjectHideFlags: 0

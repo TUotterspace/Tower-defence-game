@@ -13,6 +13,9 @@ public class EnemyMovement : MonoBehaviour
    {
         spawnPoint = newSpawnPoint;
         waypoints = newWaypoints;
+        float difficulty = DifficultyScaler.GetDifficultyMultiplier();
+        moveSpeed *= difficulty; // scale speed
+
         // Start the enemy at the spawn point (e.g., SP1, SP2, SP3, etc.)
         if (spawnPoint != null)
         {
