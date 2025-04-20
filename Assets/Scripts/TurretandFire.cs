@@ -15,6 +15,7 @@ public class TurretAndFire : MonoBehaviour
     public float chargeDepletionRate = 5f;
     public float minFireRate = 2f;
     public float maxFireRate = 0.5f;
+    public Slider chargebar;
 
     [Header("Recharge Settings")]
     public float rechargeAmountPerSecond = 15f;
@@ -23,7 +24,7 @@ public class TurretAndFire : MonoBehaviour
 
     [Header("UI")]
     public GameObject chargeBarPrefab;          // Assign your ChargeBar prefab in the inspector
-    private Image chargeBarFill;                // The "Fill" image in the prefab
+    [SerializeField] private Image chargeBarFill;                // The "Fill" image in the prefab
     private Transform chargeBarCanvas;          // The instantiated canvas
 
     private float fireCooldown = 0f;
@@ -32,13 +33,9 @@ public class TurretAndFire : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        chargebar.value = currentCharge;
 
-        if (chargeBarPrefab != null)
-        {
-            GameObject bar = Instantiate(chargeBarPrefab, transform.position + new Vector3(0, 1.2f, 0), Quaternion.identity, transform);
-            chargeBarCanvas = bar.transform;
-            chargeBarFill = bar.transform.Find("Fill").GetComponent<Image>();
-        }
+        
     }
 
     void Update()
@@ -65,9 +62,9 @@ public class TurretAndFire : MonoBehaviour
         fireCooldown -= Time.deltaTime;
 
         // Update UI charge bar
-        if (chargeBarFill != null)
+        if (chargebar != null)
         {
-            chargeBarFill.fillAmount = chargeRatio;
+            chargebar.value = currentCharge;
 
             // Optional color changes
             if (chargeRatio > 0.6f)
@@ -90,6 +87,7 @@ public class TurretAndFire : MonoBehaviour
             }
         }
     }
+    
 
     void FindTargetEnemy()
     {
@@ -130,5 +128,6 @@ public class TurretAndFire : MonoBehaviour
     {
         currentCharge += amount;
         currentCharge = Mathf.Clamp(currentCharge, 0f, maxCharge);
+        chargebar.value = currentCharge;
     }
 }

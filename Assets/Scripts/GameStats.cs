@@ -35,5 +35,6 @@ public class GameStats : MonoBehaviour
     public void AddCredits(int amount)
     {
         creditsGenerated += amount;
+        CreditManager.Instance.AddCredits(amount);
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class PlayerMovement : MonoBehaviour
     public float shotChargeCost = 10f;
 
     [Header("Charge System")]
+    [SerializeField] private Slider chargebar;
+    [SerializeField] private float rechargecost = 25;
     public float maxCharge = 100f;
     public float currentCharge;
     public float rechargeSpeed = 20f; // How fast player recharges at Home Base
@@ -22,13 +25,15 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         currentCharge = maxCharge;
+        chargebar.value = currentCharge;
     }
 
     void Update()
     {
         HandleMovement();
         HandleShooting();
-        HandleRecharge();
+        HandleRecharge(); 
+        chargebar.value = currentCharge;  
     }
 
     void HandleMovement()
@@ -85,32 +90,32 @@ public class PlayerMovement : MonoBehaviour
         {
             if (currentCharge < maxCharge)
             {
-                float rechargeAmount = rechargeSpeed * Time.deltaTime;
 
-                // Optional: credit cost per unit of charge, change multiplier as needed
-                int creditCost = Mathf.CeilToInt(rechargeAmount * 0.5f);
 
-                bool spent = CreditManager.Instance.SpendCredits(creditCost);
+
+
+                bool spent = CreditManager.Instance.SpendCredits(rechargecost * Time.deltaTime);
                 if (spent)
                 {
-                    currentCharge += rechargeAmount;
+                    currentCharge += rechargeSpeed * Time.deltaTime;
                     currentCharge = Mathf.Min(currentCharge, maxCharge);
+                    chargebar.value = currentCharge;
                 }
             }
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("HomeBase"))
+        if (other.CompareTag("Homebase"))
         {
             isNearHomeBase = true;
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.CompareTag("HomeBase"))
+        if (other.CompareTag("Homebase"))
         {
             isNearHomeBase = false;
         }

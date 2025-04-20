@@ -1,14 +1,13 @@
 using TMPro;
 using UnityEngine;
 
-using UnityEngine;
-using TMPro; // Include TextMeshPro
+
 
 public class CreditManager : MonoBehaviour
 {
     public static CreditManager Instance;
 
-    public int currentCredits = 0; // Starting credits
+    public float currentCredits = 0; // Starting credits
 
     public TMP_Text creditText; // Reference to TMP_Text (TextMeshPro)
 
@@ -28,7 +27,7 @@ public class CreditManager : MonoBehaviour
     }
 
     // Deduct credits (call when player spends credits at HomeBase)
-    public bool SpendCredits(int amount)
+    public bool SpendCredits(float amount)
     {
         if (currentCredits >= amount)
         {
@@ -47,7 +46,7 @@ public class CreditManager : MonoBehaviour
     {
         if (creditText != null)
         {
-            creditText.text = "Credits: " + currentCredits;
+            creditText.text = "Credits: " + currentCredits.ToString("0");
         }
     }
 }

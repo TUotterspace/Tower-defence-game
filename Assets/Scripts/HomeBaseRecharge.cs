@@ -5,7 +5,7 @@ public class HomeBaseRecharge : MonoBehaviour
     public int rechargeCost = 50; // The cost to recharge the player
     public float rechargeRate = 1f; // Time interval to recharge player (in seconds)
 
-    private bool isPlayerNear = false;
+   [SerializeField] private bool isPlayerNear = false;
     private GameObject player;
 
     void Update()
@@ -13,12 +13,12 @@ public class HomeBaseRecharge : MonoBehaviour
         // If player is near and has enough credits, automatically recharge
         if (isPlayerNear && CreditManager.Instance.currentCredits >= rechargeCost)
         {
-            StartRecharging();
+            //*StartRecharging();
         }
     }
 
     // This method will automatically be called when the player enters the trigger area
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player")) // Ensure it’s the player
         {
@@ -28,7 +28,7 @@ public class HomeBaseRecharge : MonoBehaviour
     }
 
     // This method will be called when the player leaves the trigger area
-    private void OnTriggerExit(Collider other)
+    private void OnTriggerExit2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
@@ -45,7 +45,7 @@ public class HomeBaseRecharge : MonoBehaviour
         {
             // You can add logic here to actually recharge the player (e.g., increasing health or turret charge)
             Debug.Log("Recharging player...");
-
+           
             // Optionally, you could add a sound effect or visual effect for the recharge
             // Example: player.GetComponent<PlayerHealth>().IncreaseHealth(amount);
 

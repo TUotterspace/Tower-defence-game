@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 public class GameOverManager : MonoBehaviour
 {
     public static GameOverManager Instance;
-
+    [SerializeField] private GameObject gameOver;
     void Awake()
     {
         if (Instance == null)
@@ -20,6 +20,6 @@ public class GameOverManager : MonoBehaviour
 
     public void TriggerGameOver()
     {
-        SceneManager.LoadScene("GameOverScene");
+       gameOver.SetActive(true);
     }
 }
