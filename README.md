@@ -1,1 +1,46 @@
-This is the final project for my GDM Class MVP Development This an entry to discuss my progress and Document My Process. As I do in every game design project I feel like I bit off more than I can chew. after discussions with my professor, I decided on a simpler version of the game. It will be a tower defense game with placable towers, obstacles, and a home base to defend. A problem I have run into again is when I hit a roadblock I tend to just put whatever is broken down and move on. This means I don't get stuck but it also means that I normally have a bunch of thing that don't work or half work when I take a step back and look at the project. I currently have a simple arena with roads that the enemies will use to reach the home base once I figure out how the nav mesh works. I also have the working spawners that spawn enemies but that are currently falling. I also built a script for my turrets to shoot any EnemyFighter Prefabs that get close but I can currently test that they work. I did test it firing in one direction which did work so I am hopeful. Lastly i made layers for each major thing but not sure if that was done correctly. Af of now this is my update for my MVP
+Final-Project-base-defence
+This is the final project for my GDM Class
+
+⚔️ VoltGuard – A 2D Tower Defense Game
+Welcome to VoltGuard, a unique take on the tower defense genre built as a final project for GDM6. In this 2D game, players must defend a central base from waves of enemies using energy-powered turrets — with a twist. Players actively manage and distribute charge, making every second of survival a challenge in strategy and resource management.
+
+🎮 Game Overview
+Unlike traditional tower defense games, this game features active player involvement. While turrets auto-target enemies, they require charge to keep firing. Players must collect and manage energy, recharge turrets manually, and even choose whether to fire manually when the pressure ramps up.
+
+The goal is simple: Defend your home base for as long as you can.
+
+🕹 Controls
+Action	Input
+Move Player	W, A, S, D
+Recharge Turret (Proximity)	Auto (within range)
+Manually Fire	(R) point with mouse
+   |
+🔧 Core Mechanics
+Energy/Charge System
+Earn credits by defeating enemies, then recharge your base, and use that charge to power turrets.
+
+Active Turret Management
+Turrets drain charge over time. You decide which ones to prioritize based on enemy paths and strategy.
+
+Manual Intervention
+Players can fire manually using charge when enemies overwhelm the turrets.
+
+Progressive Difficulty
+Enemies get faster and stronger over time, pushing the player to adapt or be overwhelmed.
+
+✨ Special Features
+Dynamic UI showing:
+
+Time survived
+Enemies killed
+Credits earned
+Base health
+Sound Effects
+
+Firing sounds for turrets
+Charging sounds when player recharges turrets
+Survival Scaling
+
+Game becomes harder over time with increased enemy health and speed.
+🛠 Installation Instructions
+Clone or download this repository:
