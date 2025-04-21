@@ -23,9 +23,16 @@ public class TurretAndFire : MonoBehaviour
     private GameObject player;
 
     [Header("UI")]
-    public GameObject chargeBarPrefab;          // Assign your ChargeBar prefab in the inspector
-    [SerializeField] private Image chargeBarFill;                // The "Fill" image in the prefab
-    private Transform chargeBarCanvas;          // The instantiated canvas
+    public GameObject chargeBarPrefab;
+    [SerializeField] private Image chargeBarFill;
+    private Transform chargeBarCanvas;
+
+    [Header("Audio")]
+    public AudioClip fireSound;
+    public AudioClip chargeSound;
+
+    private AudioSource audioSource;
+    private bool isChargingFromPlayer = false;
 
     private float fireCooldown = 0f;
     private GameObject targetEnemy;
@@ -35,38 +42,54 @@ public class TurretAndFire : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         chargebar.value = currentCharge;
 
-        
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
     {
         FindTargetEnemy();
 
-        // Drain charge
+        // Drain charge while firing
         if (targetEnemy != null)
         {
             currentCharge -= chargeDepletionRate * Time.deltaTime;
             currentCharge = Mathf.Clamp(currentCharge, 0f, maxCharge);
         }
 
-        // Auto recharge if player is nearby
+        // Recharge if player is near
         if (player != null && Vector3.Distance(transform.position, player.transform.position) <= rechargeRange)
         {
-            currentCharge += rechargeAmountPerSecond * Time.deltaTime;
-            currentCharge = Mathf.Clamp(currentCharge, 0f, maxCharge);
+            if (currentCharge < maxCharge)
+            {
+                currentCharge += rechargeAmountPerSecond * Time.deltaTime;
+                currentCharge = Mathf.Clamp(currentCharge, 0f, maxCharge);
+
+                if (!isChargingFromPlayer)
+                {
+                    isChargingFromPlayer = true;
+                    PlayChargingSound();
+                }
+            }
+        }
+        else
+        {
+            if (isChargingFromPlayer)
+            {
+                isChargingFromPlayer = false;
+                StopChargingSound();
+            }
         }
 
-        // Update fire rate based on charge
+        // Fire rate based on charge level
         float chargeRatio = currentCharge / maxCharge;
         float currentFireRate = Mathf.Lerp(minFireRate, maxFireRate, chargeRatio);
         fireCooldown -= Time.deltaTime;
 
-        // Update UI charge bar
+        // Update UI bar
         if (chargebar != null)
         {
             chargebar.value = currentCharge;
 
-            // Optional color changes
             if (chargeRatio > 0.6f)
                 chargeBarFill.color = Color.green;
             else if (chargeRatio > 0.3f)
@@ -75,7 +98,7 @@ public class TurretAndFire : MonoBehaviour
                 chargeBarFill.color = Color.red;
         }
 
-        // Attack
+        // Attack enemy if in range
         if (targetEnemy != null && Vector3.Distance(transform.position, targetEnemy.transform.position) <= detectionRange)
         {
             RotateTowardTarget();
@@ -87,7 +110,6 @@ public class TurretAndFire : MonoBehaviour
             }
         }
     }
-    
 
     void FindTargetEnemy()
     {
@@ -120,10 +142,36 @@ public class TurretAndFire : MonoBehaviour
         if (bulletPrefab != null && firePoint != null)
         {
             Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+
+            // Fire sound
+            if (fireSound != null && audioSource != null)
+            {
+                audioSource.pitch = Random.Range(0.95f, 1.05f);
+                audioSource.PlayOneShot(fireSound);
+            }
         }
     }
 
-    // Optional: Manual recharge if you want to reintroduce player interaction later
+    void PlayChargingSound()
+    {
+        if (chargeSound != null && audioSource != null && !audioSource.isPlaying)
+        {
+            audioSource.clip = chargeSound;
+            audioSource.loop = true;
+            audioSource.Play();
+        }
+    }
+
+    void StopChargingSound()
+    {
+        if (audioSource != null && audioSource.isPlaying && audioSource.clip == chargeSound)
+        {
+            audioSource.Stop();
+            audioSource.loop = false;
+            audioSource.clip = null;
+        }
+    }
+
     public void Recharge(float amount)
     {
         currentCharge += amount;
